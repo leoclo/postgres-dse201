@@ -1,2 +1,2 @@
-# postgres-des201
+# postgres-dse201
 Project in postgres for the DSE 201 course

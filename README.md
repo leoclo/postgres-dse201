@@ -36,6 +36,12 @@ Activate the created enviroment:
 source venv/bin/activate
 ```
 
+Install the requirements for the project
+
+```bash
+pip install -r requirements.txt
+```
+
 ## Creating dbs
 
 ```bash

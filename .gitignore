@@ -1,0 +1,4 @@
+.DS_Store
+local_settings.json
+venv
+__pycache__

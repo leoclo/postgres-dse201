@@ -1,0 +1,13 @@
+{
+	"postgres": {
+		"host": "127.0.0.1",
+		"port": "5432",
+		"user": "root",
+		"pwd": "localpw",
+		"db": "postgres"
+	},
+	"setup": {
+		"schemas": ["cats", "sales_cube"],
+		"gen_files": true
+	}
+}

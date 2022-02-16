@@ -29,11 +29,11 @@ CATS_SCHEMA = {
                 },
                 {
                     'name': 'username',
-                    'type': 'TEXT UNIQUE NOT NULL'
+                    'type': 'TEXT UNIQUE'
                 },
                 {
                     'name': 'fb_login',
-                    'type': 'TEXT UNIQUE NOT NULL'
+                    'type': 'TEXT UNIQUE'
                 }
             ]
         },
@@ -191,5 +191,46 @@ CATS_SCHEMA = {
             }
         }
     })
+}
+
+
+
+CATS_CSV_DATA = {
+    'name': CATS_SCHEMA['name'],
+    'tables': [
+        {
+            'table_name': CATS_USERS,
+            'file_name': 'Cats_users',
+            'rename_cols': {
+                'uid': 'id',
+                'fname': 'first_name',
+                'lname': 'last_name'
+            }
+        },
+        {
+            'table_name': CATS_VIDEOS,
+            'file_name': 'Cats_videos',
+            'rename_cols': {
+                'vid': 'id',
+                'vname': 'title'
+            }
+        },
+        {
+            'table_name': CATS_LIKES,
+            'file_name': 'Cats_likes',
+            'rename_cols': {
+                'uid': 'user_id',
+                'vid': 'video_id'
+            }
+        },
+        {
+            'table_name': CATS_FRIENDS,
+            'file_name': 'Cats_friends',
+            'rename_cols': {
+                'uid': 'user_id',
+                'ufid': 'user_id_friend'
+            }
+        }
+    ]
 }
 

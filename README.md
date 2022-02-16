@@ -39,5 +39,22 @@ source venv/bin/activate
 ## Creating dbs
 
 ```bash
- python tests/test_mysql.py settings.json
+ python db/build.py settings.json
+
  ```
+
+## M2
+
+```bash
+ python db/m2/cats.py settings.json
+
+ ```
+```bash
+ python db/m2/sales_cube.py settings.json
+ ```
+
+## Tip
+___
+
+For database modeling use [sqldbm](https://app.sqldbm.com/)
+

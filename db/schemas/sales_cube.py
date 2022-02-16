@@ -12,8 +12,12 @@ SALES_SCHEMA = {
         SALES_STATES: {
             'columns': [
                 {
-                    'name': 'state',
-                    'type': 'CHAR(2) PRIMARY KEY'
+                    'name': 'id',
+                    'type': 'INT PRIMARY KEY'
+                },
+                {
+                    'name': 'ab',
+                    'type': 'CHAR(2) NOT NULL'
                 },
                 {
                     'name': 'name',
@@ -36,15 +40,15 @@ SALES_SCHEMA = {
                     'type': 'TEXT NOT NULL'
                 },
                 {
-                    'name': 'state',
-                    'type': 'CHAR(2) NOT NULL'
+                    'name': 'state_id',
+                    'type': 'INT NOT NULL'
                 }
             ],
             'constraints': [
                 {
                     'name': f'fk_{SALES_CUSTOMERS}_{SALES_STATES}',
-                    'type': 'FOREIGN KEY(state)',
-                    'spec': f'{SALES_STATES}(state) ON DELETE CASCADE'
+                    'type': 'FOREIGN KEY(state_id)',
+                    'spec': f'{SALES_STATES}(id) ON DELETE CASCADE'
                 }
             ]
         },
@@ -79,8 +83,8 @@ SALES_SCHEMA = {
                     'type': 'INT NOT NULL'
                 },
                 {
-                    'name': 'list_price_cents',
-                    'type': 'INT NOT NULL'
+                    'name': 'price',
+                    'type': 'FLOAT NOT NULL'
                 }
             ],
             'constraints': [
@@ -128,4 +132,59 @@ SALES_SCHEMA = {
             ]
         }
     })
+}
+
+SALES_CSV_DATA = {
+    'name': SALES_SCHEMA['name'],
+    'tables': [
+        {
+            'table_name': SALES_STATES,
+            'file_name': 'Sales_cube_states',
+            'rename_cols': {
+                'sid': 'id',
+                'stabbrev': 'ab',
+                'stname': 'name'
+            }
+        },
+        {
+            'table_name': SALES_CUSTOMERS,
+            'file_name': 'Sales_cube_customers',
+            'rename_cols': {
+                'id': 'id',
+                'fname': 'first_name',
+                'lname': 'last_name',
+                'state': 'state_id'
+            }
+        },
+        {
+            'table_name': SALES_CATEGORIES,
+            'file_name': 'Sales_cube_categories',
+            'rename_cols': {
+                'id': 'id',
+                'cname': 'name',
+                'cdescr': 'description'
+            }
+        },
+        {
+            'table_name': SALES_PRODUCTS,
+            'file_name': 'Sales_cube_products',
+            'rename_cols': {
+                'id': 'id',
+                'pname': 'name',
+                'price': 'price',
+                'cid': 'category_id'
+            }
+        },
+        {
+            'table_name': SALES_SALES,
+            'file_name': 'Sales_cube_sales',
+            'rename_cols': {
+                'id': 'id',
+                'pid': 'product_id',
+                'cid': 'customer_id',
+                'quantity': 'amount',
+                'discount': 'discount'
+            }
+        }
+    ]
 }

@@ -8,6 +8,7 @@
 	},
 	"setup": {
 		"schemas": ["cats", "sales_cube"],
+		"data": ["cats", "sales_cube"],
 		"gen_files": true
 	}
 }

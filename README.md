@@ -36,6 +36,12 @@ Activate the created enviroment:
 source venv/bin/activate
 ```
 
+Install the requirements for the project
+
+```bash
+pip install -r requirements.txt
+```
+
 ## Creating dbs
 
 ```bash
@@ -57,4 +63,5 @@ source venv/bin/activate
 ___
 
 For database modeling use [sqldbm](https://app.sqldbm.com/)
+
 

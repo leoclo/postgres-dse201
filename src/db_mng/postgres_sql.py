@@ -50,6 +50,19 @@ class PostgresSql():
         self.queries.append(qry)
         return pd.read_sql(qry, self.engine)
 
+    def analyze_read_qry(self, qry):
+        qry = f'EXPLAIN ANALYZE {qry.strip()};'
+
+        self.queries.append(qry)
+        with self.conn.cursor() as cursor:
+            cursor.execute(qry)
+            return cursor.fetchall()
+
+    def insert_with_alchemy(self, schema, table_name, df):
+        return df.to_sql(
+            table_name, self.engine, schema, if_exists='append', index=False
+        )
+
     def create_schema(self, name):
         return self.perform_query(f'CREATE SCHEMA IF NOT EXISTS {name}')
 
@@ -93,3 +106,6 @@ class PostgresSql():
         return self.perform_query(f"""
             INSERT INTO {schema}.{table_name}({cols}) VALUES ({vals})
         """)
+
+
+

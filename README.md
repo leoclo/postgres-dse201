@@ -45,7 +45,27 @@ pip install -r requirements.txt
 ## Creating dbs
 
 ```bash
- python db/build.py settings.json
+ python db/build.py settings.json build_schemas
+
+ ```
+
+## Populating db
+
+Create csv files
+```bash
+ python db/csv_data/generate_data.py
+
+ ```
+
+Insert with alchemy
+```bash
+ python db/build.py settings.json insert_alchemy
+
+ ```
+
+Insert query one by one
+```bash
+ python db/build.py settings.json insert_data
 
  ```
 
@@ -57,6 +77,26 @@ pip install -r requirements.txt
  ```
 ```bash
  python db/m2/sales_cube.py settings.json
+ ```
+
+## M3
+
+```bash
+ python db/m3/cats.py settings.json
+
+ ```
+```bash
+ python db/m3/sales_cube.py settings.json
+ ```
+
+## M4
+
+```bash
+ python db/m4/cats.py settings.json
+
+ ```
+```bash
+ python db/m4/sales_cube.py settings.json
  ```
 
 ## Tip

@@ -7,8 +7,14 @@
 		"db": "postgres"
 	},
 	"setup": {
-		"schemas": ["cats", "sales_cube"],
-		"data": ["cats", "sales_cube"],
-		"gen_files": true
+		"schemas": ["sales_cube"],
+		"build_schemas": {
+			"ix": true
+		},
+		"data": ["sales_cube"],
+		"generate_file": true
+	},
+	"m3":{
+		"file_suff": "index"
 	}
 }

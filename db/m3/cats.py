@@ -18,7 +18,7 @@ class CatsOptions():
         return getattr(self, k)
 
     def overall_likes(self):
-        return self.postgres_sql.read_qry(
+        return self.postgres_sql.analyze_read_qry(
             f"""
                 SELECT video_id, COUNT(*) as overall_likes
                 FROM cats_201.likes
@@ -27,7 +27,7 @@ class CatsOptions():
         )
 
     def friends_likes(self):
-        return self.postgres_sql.read_qry(
+        return self.postgres_sql.analyze_read_qry(
             f"""
                 SELECT
                     video_id,
@@ -46,7 +46,7 @@ class CatsOptions():
         )
 
     def friends_of_friends_likes(self):
-        return self.postgres_sql.read_qry(
+        return self.postgres_sql.analyze_read_qry(
         f"""
             WITH uf AS (
                 SELECT DISTINCT u1.user_id, u2.user_id as friend_id
@@ -84,7 +84,7 @@ class CatsOptions():
         )
 
     def my_kind_of_cats(self):
-        return self.postgres_sql.read_qry(
+        return self.postgres_sql.analyze_read_qry(
         f"""
             WITH videos_liked_by_X AS (
                 SELECT video_id FROM cats_201.likes WHERE user_id = 2
@@ -103,7 +103,7 @@ class CatsOptions():
         )
 
     def my_kind_of_cats_pref(self):
-        return self.postgres_sql.read_qry(
+        return self.postgres_sql.analyze_read_qry(
         f"""
             WITH videos_liked_by_X AS (
                 SELECT video_id FROM cats_201.likes WHERE user_id = 2
@@ -158,10 +158,15 @@ def build_options(settings):
         cat_options.postgres_sql.queries.append(
             f'\n\n-- {options_titles[opt]}\n'
         )
-        cat_options[opt]()
+
+        res = cat_options[opt]()
+        cat_options.postgres_sql.queries.append(
+            '\n'.join(['-- ' + v[0] for v in res[-2:]])
+        )
 
 
-    with open(f'db/m2/files/Cats_M2_leonardo.sql', 'w') as f:
+    f_name = f'{settings["m3"]["file_suff"]}_cats.sql'
+    with open(f'db/m3/files/{f_name}', 'w') as f:
         f.write('\n'.join(cat_options.postgres_sql.queries))
 
     print('Success')

@@ -23,7 +23,12 @@ SALES_SCHEMA = {
                     'name': 'name',
                     'type': 'TEXT NOT NULL'
                 }
-            ]
+            ],
+            'index': {
+                'i_type': 'UNIQUE INDEX',
+                'name': f'{SALES_STATES}_unique_index',
+                'cols': ['ab']
+            }
         },
         SALES_CUSTOMERS: {
             'columns': [
@@ -50,7 +55,12 @@ SALES_SCHEMA = {
                     'type': 'FOREIGN KEY(state_id)',
                     'spec': f'{SALES_STATES}(id) ON DELETE CASCADE'
                 }
-            ]
+            ],
+            'index': {
+                'i_type': 'INDEX',
+                'name': f'{SALES_CUSTOMERS}_index',
+                'cols': ['state_id']
+            }
         },
         SALES_CATEGORIES: {
             'columns': [
@@ -93,7 +103,12 @@ SALES_SCHEMA = {
                     'type': 'FOREIGN KEY(category_id)',
                     'spec': f'{SALES_CATEGORIES}(id) ON DELETE CASCADE'
                 }
-            ]
+            ],
+            'index': {
+                'i_type': 'INDEX',
+                'name': f'{SALES_PRODUCTS}_index',
+                'cols': ['category_id']
+            }
         },
         SALES_SALES: {
             'columns': [
@@ -129,7 +144,13 @@ SALES_SCHEMA = {
                     'type': 'FOREIGN KEY(customer_id)',
                     'spec': f'{SALES_CUSTOMERS}(id) ON DELETE CASCADE'
                 }
-            ]
+            ],
+            'index': {
+                'i_type': 'UNIQUE INDEX',
+                'name': f'{SALES_SALES}_index',
+                'cols': ['id', 'product_id', 'customer_id']
+            }
+
         }
     })
 }
